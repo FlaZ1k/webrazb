@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Rotation Result</h1>
+    <fieldset>
+        <legend>Rotated Image</legend>
+        <img src="{{ rotated_image }}" alt="Rotated Image">
+    </fieldset>
+    <fieldset>
+        <legend>Color Distribution</legend>
+        <img src="{{ original_histogram }}" alt="Original Histogram">
+        <img src="{{ rotated_histogram }}" alt="Rotated Histogram">
+    </fieldset>
+    <a href="{{ url_for('index') }}">Rotate Another Image</a>
+</body>
+</html>

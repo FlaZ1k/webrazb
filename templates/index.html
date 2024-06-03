@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotate Image</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <h1>Rotate Image Application</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend>Rotate Image</legend>
+            <p>
+                {{ form.image.label }}<br>
+                {{ form.image(size=32) }}
+            </p>
+            <p>
+                {{ form.angle.label }}<br>
+                {{ form.angle(size=32) }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </fieldset>
+        <fieldset>
+            <legend>Captcha</legend>
+            {{ captcha_form.hidden_tag() }}
+            {{ captcha_form.recaptcha() }}
+            <p>{{ captcha_form.submit() }}</p>
+        </fieldset>
+    </form>
+</body>
+</html>
