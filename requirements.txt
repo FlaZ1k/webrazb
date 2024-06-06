@@ -1,11 +1,4 @@
 Flask
 Flask-WTF
 gunicorn
-PIL
-matplotlib
-matplotlib.pyplot
-numpy
-forms
-flask_wtf
-wtforms
-ssl
+Pillow
