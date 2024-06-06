@@ -9,7 +9,7 @@ from wtforms import SubmitField
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 from flask import Flask, render_template, request, flash
-
+#
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6Lfa0u4pAAAAAJpedooeLOUQXUqtNizbpRhMoDqj'
