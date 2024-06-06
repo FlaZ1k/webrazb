@@ -1,6 +1,12 @@
-services:
-  - type: web
-    plan: free
-    name: mysite
-    runtime: python
-    startCommand: "python3 ./server.py"
+language: python
+python:
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+script:
+  - pytest
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: main
