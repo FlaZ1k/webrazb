@@ -2,3 +2,10 @@ Flask
 Flask-WTF
 gunicorn
 Pillow
+matplotlib
+matplotlib.pyplot
+numpy
+forms
+flask_wtf
+wtforms
+ssl
