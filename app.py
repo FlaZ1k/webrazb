@@ -10,12 +10,10 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 from flask import Flask, render_template, request, flash
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6Lfa0u4pAAAAAJpedooeLOUQXUqtNizbpRhMoDqj'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '6Lfa0u4pAAAAAN5nkuLnrkCu752_7v_P7pcOi3Ef'
-
 
 def save_plot(image_array, filename):
     plt.figure()
@@ -26,15 +24,12 @@ def save_plot(image_array, filename):
     plt.savefig(filename)
     plt.close()
 
-
 def rotate_image(image, angle):
     return image.rotate(angle, expand=True)
-
 
 class CaptchaForm(FlaskForm):
     recaptcha = RecaptchaField()
     submit = SubmitField('Submit')
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -64,10 +59,7 @@ def index():
                                    rotated_histogram=rotated_histogram_path)
         else:
             flash('Form validation failed. Please try again.', 'danger')
-            return render_template('index.html', form=form, captcha_form=captcha_form)
-    else:
-        return render_template('index.html', form=form, captcha_form=captcha_form)
-
+    return render_template('index.html', form=form, captcha_form=captcha_form)
 
 if __name__ == '__main__':
     app.run(debug=True)
