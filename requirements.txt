@@ -4,3 +4,4 @@ gunicorn
 Pillow
 matplotlib
 numpy
+pytest
