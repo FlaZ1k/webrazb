@@ -17,9 +17,9 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6Lfa0u4pAAAAAN5nkuLnrkCu752_7v_P7pcOi3Ef'
 
 def save_plot(image_array, filename):
     plt.figure()
-    plt.hist(image_array.ravel(), bins=256, color='orange', alpha=0.5, label='Histogram')
-    plt.xlabel('Pixel Value')
-    plt.ylabel('Frequency')
+    plt.hist(image_array.ravel(), bins=256, color='blue', alpha=0.5, label='Гистограмма')
+    plt.xlabel('Значение пикселя')
+    plt.ylabel('Количество')
     plt.legend()
     plt.savefig(filename)
     plt.close()
@@ -58,7 +58,7 @@ def index():
                                    original_histogram=original_histogram_path,
                                    rotated_histogram=rotated_histogram_path)
         else:
-            flash('Form validation failed. Please try again.', 'danger')
+            flash('Не удалось выполнить проверку формы. Пожалуйста, попробуйте снова.', 'danger')
     return render_template('index.html', form=form, captcha_form=captcha_form)
 
 if __name__ == '__main__':
