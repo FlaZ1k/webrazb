@@ -58,7 +58,7 @@ def index():
                                    original_histogram=original_histogram_path,
                                    rotated_histogram=rotated_histogram_path)
         else:
-            flash('Не удалось выполнить проверку формы. Пожалуйста, попробуйте снова.', 'danger')
+            flash('Ошибка. Пожалуйста, попробуйте снова.', 'danger')
     return render_template('index.html', form=form, captcha_form=captcha_form)
 
 if __name__ == '__main__':
