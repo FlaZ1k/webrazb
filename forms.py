@@ -10,5 +10,5 @@ def image_file_check(form, field):
 class RotateImageForm(FlaskForm):
     image = FileField('Upload Image', validators=[FileRequired(), image_file_check])
     angle = FloatField('Angle', validators=[DataRequired()])
+    scale = FloatField('Scale', validators=[DataRequired()])
     submit = SubmitField('Rotate Image')
-#
