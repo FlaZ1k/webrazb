@@ -17,7 +17,7 @@ app.config['RECAPTCHA_PRIVATE_KEY'] = '6Lfa0u4pAAAAAN5nkuLnrkCu752_7v_P7pcOi3Ef'
 
 def save_plot(image_array, filename):
     plt.figure()
-    plt.hist(image_array.ravel(), bins=256, color='blue', alpha=0.5, label='Гистограмма')
+    plt.hist(image_array.ravel(), bins=256, color='blue', alpha=0.5)
     plt.xlabel('Значение пикселя')
     plt.ylabel('Количество')
     plt.legend()
