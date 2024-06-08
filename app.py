@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 from forms import RotateImageForm
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import SubmitField
+from wtforms import SubmitField, FloatField
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 from flask import Flask, render_template, request, flash
-#
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '6Lfa0u4pAAAAAJpedooeLOUQXUqtNizbpRhMoDqj'
@@ -27,6 +27,9 @@ def save_plot(image_array, filename):
 def rotate_image(image, angle):
     return image.rotate(angle, expand=True)
 
+def resize_image(image, scale):
+    return image.resize((int(image.size[0] * scale), int(image.size[1] * scale)))
+
 class CaptchaForm(FlaskForm):
     recaptcha = RecaptchaField()
     submit = SubmitField('Submit')
@@ -40,21 +43,24 @@ def index():
         if form.validate_on_submit() and captcha_form.validate_on_submit():
             image_file = request.files['image']
             angle = form.angle.data
+            scale = form.scale.data
             image = Image.open(image_file)
+            image = resize_image(image, scale)
             rotated_image = rotate_image(image, angle)
-            image_array = np.array(image)
             rotated_image_array = np.array(rotated_image)
 
             original_histogram_path = 'static/original_histogram.png'
             rotated_histogram_path = 'static/rotated_histogram.png'
-            save_plot(image_array, original_histogram_path)
+            save_plot(np.array(image), original_histogram_path)
             save_plot(rotated_image_array, rotated_histogram_path)
 
             rotated_image_path = 'static/rotated_image.png'
+            resized_image_path = 'static/resized_image.png'
             rotated_image.save(rotated_image_path)
 
             return render_template('result.html', original_image=image_file.filename,
                                    rotated_image=rotated_image_path,
+                                   resized_image=resized_image_path,
                                    original_histogram=original_histogram_path,
                                    rotated_histogram=rotated_histogram_path)
         else:
